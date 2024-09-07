@@ -5,6 +5,9 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	
 	<class>com.skilldistillery.budgets.entities.Transaction</class>
+	<class>com.skilldistillery.budgets.entities.Account</class>
+	<class>com.skilldistillery.budgets.entities.Category</class>
+	<class>com.skilldistillery.budgets.entities.User</class>
 	
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/budgetsdb" />

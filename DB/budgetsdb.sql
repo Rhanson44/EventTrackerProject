@@ -16,23 +16,23 @@ CREATE SCHEMA IF NOT EXISTS `budgetsdb` DEFAULT CHARACTER SET utf8 ;
 USE `budgetsdb` ;
 
 -- -----------------------------------------------------
--- Table `Category`
+-- Table `category`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Category` ;
+DROP TABLE IF EXISTS `category` ;
 
-CREATE TABLE IF NOT EXISTS `Category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NULL,
+  `name` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Transaction`
+-- Table `transaction`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Transaction` ;
+DROP TABLE IF EXISTS `transaction` ;
 
-CREATE TABLE IF NOT EXISTS `Transaction` (
+CREATE TABLE IF NOT EXISTS `transaction` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(100) NOT NULL,
   `amount` DOUBLE NOT NULL,
@@ -43,7 +43,41 @@ CREATE TABLE IF NOT EXISTS `Transaction` (
   INDEX `fk_Transaction_Category_idx` (`category_id` ASC) VISIBLE,
   CONSTRAINT `fk_Transaction_Category`
     FOREIGN KEY (`category_id`)
-    REFERENCES `Category` (`id`)
+    REFERENCES `category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user` ;
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  `enabled` TINYINT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `account`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `account` ;
+
+CREATE TABLE IF NOT EXISTS `account` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(100) NULL,
+  `balance` DOUBLE NULL,
+  `user_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_account_user1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_account_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -60,21 +94,41 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `Category`
+-- Data for table `category`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `budgetsdb`;
-INSERT INTO `Category` (`id`, `name`) VALUES (1, 'Work');
+INSERT INTO `category` (`id`, `name`) VALUES (1, 'Work');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `Transaction`
+-- Data for table `transaction`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `budgetsdb`;
-INSERT INTO `Transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`) VALUES (1, 'Income', 10.00, NULL, NULL, 1);
+INSERT INTO `transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`) VALUES (1, 'Income', 10.00, NULL, NULL, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `budgetsdb`;
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`) VALUES (1, 'user', 'user', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `account`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `budgetsdb`;
+INSERT INTO `account` (`id`, `type`, `balance`, `user_id`) VALUES (1, 'Checking', 100.00, 1);
 
 COMMIT;
 

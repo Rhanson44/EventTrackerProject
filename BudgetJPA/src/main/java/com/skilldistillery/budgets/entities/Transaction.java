@@ -25,9 +25,9 @@ public class Transaction {
 	@Column(name = "payment_date")
 	private LocalDateTime paymentDate;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "category_id")
-//	private Category category;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 	
 	public Transaction() {}
 
