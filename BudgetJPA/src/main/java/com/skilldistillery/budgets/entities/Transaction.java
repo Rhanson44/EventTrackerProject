@@ -30,6 +30,14 @@ public class Transaction {
 	private Category category;
 	
 	public Transaction() {}
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public int getId() {
 		return id;

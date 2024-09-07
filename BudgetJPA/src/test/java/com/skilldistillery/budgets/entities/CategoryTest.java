@@ -45,5 +45,11 @@ class CategoryTest {
 		assertNotNull(category);
 		assertEquals("Work", category.getName());
 	}
+	
+	@Test
+	void test_Category_Transaction_OneToMany_relationship() {
+		assertNotNull(category.getTransactions());
+		assertTrue(category.getTransactions().size() > 0);
+	}
 
 }

@@ -1,11 +1,13 @@
 package com.skilldistillery.budgets.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -17,7 +19,19 @@ public class User {
 	private String password;
 	private boolean enabled;
 	
+	@OneToMany(mappedBy = "user")
+	private List<Account> accounts;
+	
+
 	public User() {}
+	
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+	
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
+	}
 
 	public int getId() {
 		return id;

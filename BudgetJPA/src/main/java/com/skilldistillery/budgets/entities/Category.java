@@ -21,6 +21,14 @@ public class Category {
 	@OneToMany(mappedBy = "category")
 	private List<Transaction> transactions;
 	
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+	
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+	
 	public int getId() {
 		return id;
 	}

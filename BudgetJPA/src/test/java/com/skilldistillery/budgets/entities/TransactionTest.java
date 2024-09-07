@@ -45,5 +45,11 @@ class TransactionTest {
 		assertNotNull(transaction);
 		assertEquals("Income", transaction.getType());
 	}
+	
+	@Test
+	void test_Transaction_Category_ManyToOne_relationship() {
+		assertNotNull(transaction.getCategory());
+		assertEquals("Work", transaction.getCategory().getName());
+	}
 
 }

@@ -45,5 +45,11 @@ class UserTest {
 		assertNotNull(user);
 		assertEquals("user", user.getUsername());
 	}
+	
+	@Test
+	void test_User_Account_OneToMany_relationship() {
+		assertNotNull(user.getAccounts());
+		assertTrue(user.getAccounts().size() > 0);
+	}
 
 }

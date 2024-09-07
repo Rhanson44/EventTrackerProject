@@ -45,5 +45,11 @@ class AccountTest {
 		assertNotNull(account);
 		assertEquals("Checking", account.getType());
 	}
+	
+	@Test
+	void test_Account_User_ManyToOne_relationship() {
+		assertNotNull(account.getUser());
+		assertEquals(1, account.getUser().getId());
+	}
 
 }
