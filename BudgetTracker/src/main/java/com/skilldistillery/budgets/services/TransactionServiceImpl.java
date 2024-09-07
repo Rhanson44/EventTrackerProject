@@ -1,6 +1,7 @@
 package com.skilldistillery.budgets.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,12 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public Transaction show(int id) {
-		return null;
+		Optional<Transaction> optTransaction = repo.findById(id);
+		Transaction foundTransaction = null;
+		if (optTransaction.isPresent()) {
+			foundTransaction = optTransaction.get();
+		}
+		return foundTransaction;
 	}
 
 	@Override
