@@ -28,6 +28,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `transaction_party`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `transaction_party` ;
+
+CREATE TABLE IF NOT EXISTS `transaction_party` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `transaction`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `transaction` ;
@@ -39,11 +51,18 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `description` VARCHAR(300) NULL,
   `payment_date` DATETIME NULL,
   `category_id` INT NOT NULL,
+  `transaction_party_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Transaction_Category_idx` (`category_id` ASC) VISIBLE,
+  INDEX `fk_transaction_transaction_party1_idx` (`transaction_party_id` ASC) VISIBLE,
   CONSTRAINT `fk_Transaction_Category`
     FOREIGN KEY (`category_id`)
     REFERENCES `category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_transaction_transaction_party1`
+    FOREIGN KEY (`transaction_party_id`)
+    REFERENCES `transaction_party` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -104,11 +123,21 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `transaction_party`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `budgetsdb`;
+INSERT INTO `transaction_party` (`id`, `name`) VALUES (1, 'FirstBank');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `transaction`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `budgetsdb`;
-INSERT INTO `transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`) VALUES (1, 'Income', 10.00, NULL, NULL, 1);
+INSERT INTO `transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`, `transaction_party_id`) VALUES (1, 'Income', 10.00, NULL, NULL, 1, 1);
 
 COMMIT;
 

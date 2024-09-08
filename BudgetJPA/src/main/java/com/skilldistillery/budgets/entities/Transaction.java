@@ -1,5 +1,6 @@
 package com.skilldistillery.budgets.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -23,14 +24,26 @@ public class Transaction {
 	private String description;
 	
 	@Column(name = "payment_date")
-	private LocalDateTime paymentDate;
+	private LocalDate paymentDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
+	@ManyToOne
+	@JoinColumn(name = "transaction_party_id")
+	private TransactionParty transactionParty;
+	
 	public Transaction() {}
 	
+	public TransactionParty getTransactionParty() {
+		return transactionParty;
+	}
+
+	public void setTransactionParty(TransactionParty transactionParty) {
+		this.transactionParty = transactionParty;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -71,11 +84,11 @@ public class Transaction {
 		this.description = description;
 	}
 
-	public LocalDateTime getPaymentDate() {
+	public LocalDate getPaymentDate() {
 		return paymentDate;
 	}
 
-	public void setPaymentDate(LocalDateTime paymentDate) {
+	public void setPaymentDate(LocalDate paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 

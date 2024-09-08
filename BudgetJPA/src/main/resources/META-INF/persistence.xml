@@ -8,6 +8,7 @@
 	<class>com.skilldistillery.budgets.entities.Account</class>
 	<class>com.skilldistillery.budgets.entities.Category</class>
 	<class>com.skilldistillery.budgets.entities.User</class>
+	<class>com.skilldistillery.budgets.entities.TransactionParty</class>
 	
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/budgetsdb" />

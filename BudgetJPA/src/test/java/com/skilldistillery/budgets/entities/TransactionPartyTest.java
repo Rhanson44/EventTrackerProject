@@ -1,6 +1,8 @@
 package com.skilldistillery.budgets.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -12,11 +14,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class TransactionTest {
+class TransactionPartyTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Transaction transaction;
+	private TransactionParty party;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,31 +33,25 @@ class TransactionTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		transaction = em.find(Transaction.class, 1);
+		party = em.find(TransactionParty.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		transaction = null;
+		party = null;
 	}
 
 	@Test
 	void test_Transaction_entity_mapping() {
-		assertNotNull(transaction);
-		assertEquals("Income", transaction.getType());
+		assertNotNull(party);
+		assertEquals("FirstBank", party.getName());
 	}
 	
 	@Test
-	void test_Transaction_Category_ManyToOne_relationship() {
-		assertNotNull(transaction.getCategory());
-		assertEquals("Work", transaction.getCategory().getName());
-	}
-	
-	@Test
-	void test_Transaction_TransactionParty_ManyToOne_relationship() {
-		assertNotNull(transaction.getTransactionParty());
-		assertEquals("FirstBank", transaction.getTransactionParty().getName());
+	void test_TransactionParty_Transaction_OneToMany_relationship() {
+		assertNotNull(party.getTransactions());
+		assertTrue(party.getTransactions().size() > 0);
 	}
 
 }
