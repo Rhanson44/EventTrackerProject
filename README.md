@@ -21,8 +21,7 @@ This project aims to develop a RESTful API using Spring Boot and JPA (Java Persi
 | GET       | /api/transactions/searchDate/2024-05-05/2024-06-06                  | Search by date range             | 200, 400, 404        |
 | GET       | /api/transactionParties                                             | List transaction parties         | 200                  |
 | POST      | /api/transactionParties                                             | Create new transaction party     | 201, 400             |
-| GET       | /api/transactionParties/1/transactions                              | Find transactions by 
-party id    | 200, 400, 404        |
+| GET       | /api/transactionParties/1/transactions                              | Find transactions by party id    | 200, 400, 404        |
 
 ## Technologies Used
 
