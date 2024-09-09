@@ -118,6 +118,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `budgetsdb`;
 INSERT INTO `category` (`id`, `name`) VALUES (1, 'Work');
+INSERT INTO `category` (`id`, `name`) VALUES (2, 'Venmo');
+INSERT INTO `category` (`id`, `name`) VALUES (3, 'Gift');
+INSERT INTO `category` (`id`, `name`) VALUES (4, 'Self');
 
 COMMIT;
 
@@ -128,6 +131,9 @@ COMMIT;
 START TRANSACTION;
 USE `budgetsdb`;
 INSERT INTO `transaction_party` (`id`, `name`) VALUES (1, 'FirstBank');
+INSERT INTO `transaction_party` (`id`, `name`) VALUES (2, 'Red Robin');
+INSERT INTO `transaction_party` (`id`, `name`) VALUES (3, 'Bob');
+INSERT INTO `transaction_party` (`id`, `name`) VALUES (4, 'Personal');
 
 COMMIT;
 
@@ -137,7 +143,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `budgetsdb`;
-INSERT INTO `transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`, `transaction_party_id`) VALUES (1, 'Income', 10.00, NULL, NULL, 1, 1);
+INSERT INTO `transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`, `transaction_party_id`) VALUES (1, 'Income', 10.00, 'Venmo', '2024-05-05', 1, 1);
+INSERT INTO `transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`, `transaction_party_id`) VALUES (2, 'Expense', 50.00, 'Groceries', '2024-07-05', 4, 4);
+INSERT INTO `transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`, `transaction_party_id`) VALUES (3, 'Expense', 12.50, 'Food', '2024-08-08', 4, 4);
+INSERT INTO `transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`, `transaction_party_id`) VALUES (4, 'Income', 5000.00, 'Lottery', '2025-01-01', 3, 4);
+INSERT INTO `transaction` (`id`, `type`, `amount`, `description`, `payment_date`, `category_id`, `transaction_party_id`) VALUES (5, 'Income', 200.00, 'Paycheck', '2025-02-03', 1, 2);
 
 COMMIT;
 
