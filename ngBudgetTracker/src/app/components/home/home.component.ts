@@ -31,4 +31,10 @@ export class HomeComponent implements OnInit{
         console.error(fail);}
     })
   }
+
+  //detail div selected transaction
+  //form to create new transaction
+  //update form
+  //delete transaction
+  //models for other entities
 }
