@@ -1,6 +1,51 @@
-<h1>Welcome</h1>
+<h1>Budget Tracker</h1>
 
-<!-- build as a table -->
-<ul>
-  <li *ngFor="let transaction of transactions">{{transaction.type}}</li>
-</ul>
+<!-- Display transactions in a table -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Description</th>
+      <th>Payment Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions" (click)="selectTransaction(transaction)">
+      <td>{{ transaction.id }}</td>
+      <td>{{ transaction.type }}</td>
+      <td>{{ transaction.amount | currency }}</td>
+      <td>{{ transaction.description }}</td>
+      <td>{{ transaction.paymentDate | date }}</td>
+      <td>
+        <button (click)="deleteTransaction(transaction.id); $event.stopPropagation();">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Form for adding new transactions -->
+<h3>Add New Transaction</h3>
+<form (ngSubmit)="createTransaction()">
+  <input [(ngModel)]="newTransaction.type" name="type" placeholder="Type" required />
+  <input [(ngModel)]="newTransaction.amount" name="amount" type="number" placeholder="Amount" required />
+  <input [(ngModel)]="newTransaction.description" name="description" placeholder="Description" />
+  <input [(ngModel)]="newTransaction.paymentDate" name="paymentDate" type="date" />
+  <button type="submit">Add</button>
+</form>
+
+<!-- Form for updating selected transaction -->
+<div *ngIf="selectedTransaction">
+  <h3>Edit Transaction</h3>
+  <form (ngSubmit)="updateTransaction()">
+    <input [(ngModel)]="selectedTransaction.type" name="type" placeholder="Type" required />
+    <input [(ngModel)]="selectedTransaction.amount" name="amount" type="number" placeholder="Amount" required />
+    <input [(ngModel)]="selectedTransaction.description" name="description" placeholder="Description" />
+    <input [(ngModel)]="selectedTransaction.paymentDate" name="paymentDate" type="date" />
+    <button type="submit">Update</button>
+    <button type="button" (click)="clearSelectedTransaction()">Cancel</button>
+  </form>
+</div>
+
